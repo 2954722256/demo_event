@@ -47,7 +47,8 @@ public class TouchEventChilds extends LinearLayout {
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		TouchEventUtil.logActionMsg(getClass(),"onTouchEvent",ev);
-		return super.onTouchEvent(ev);
+//		return super.onTouchEvent(ev);
+		return true;
 	}
 
 }

@@ -14,12 +14,44 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        ((ViewGroup)this.getWindow().getDecorView().getRootView()).getChildAt(0).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TouchEventUtil.doClick(MainActivity.class);
-//            }
-//        });
+
+        setButton();
+        setGroupListenr();
+    }
+
+    private void setGroupListenr() {
+//        setViewListener(findViewById(R.id.father), "father");
+//        setViewListener(findViewById(R.id.childs), "childs");
+//        setViewListener(findViewById(R.id.childs2), "childs2");
+    }
+
+    private void setViewListener(final View view, final String viewName){
+        if(view == null){
+            return;
+        }
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TouchEventUtil.logActionMsg(MainActivity.class, viewName+" setOnClickListener  onClick", null);
+            }
+        });
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                TouchEventUtil.logActionMsg(MainActivity.class, viewName+" setOnTouchListener  onTouch", event);
+                return false;
+            }
+        });
+    }
+
+    private void setButton() {
+        View view = findViewById(R.id.testBtn);
+        setViewListener(view, "btn");
+
+        View view2 = findViewById(R.id.testLl);
+        setViewListener(view2, "LL");
+
+//        setViewListener(findViewById(R.id.allRl), "OutPlant");
     }
 
     @Override
@@ -32,6 +64,15 @@ public class MainActivity extends AppCompatActivity {
     public boolean dispatchTouchEvent(MotionEvent ev) {
         TouchEventUtil.logActionMsg(getClass(),"dispatchTouchEvent",ev);
         return super.dispatchTouchEvent(ev);
+    }
+
+
+    /**
+     * 把 打印切换成【down】
+     * 只是自定义的Button的自定义View
+     * 重写了   dispatchTouchEvent     onTouchEvent 方法
+     */
+    public static void doSth0(){
     }
 
 

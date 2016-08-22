@@ -17,6 +17,10 @@ public class TouchEventUtil {
 
 
     public static void logActionMsg(Class cls, String functionName, MotionEvent ev, String msg) {
+        if(ev == null){
+            doPrint(cls, functionName,ev, msg);
+            return;
+        }
         switch (mLogType) {
             case Down:
                 if (ev.getAction() == MotionEvent.ACTION_DOWN)
@@ -39,7 +43,11 @@ public class TouchEventUtil {
     }
 
     private static void doPrint(Class cls, String functionName, MotionEvent ev, String msg) {
-        Log.e("touch", cls.getSimpleName() + "\t----\t" + functionName + "\t---->\t" + getTouchAction(ev.getAction()) + "\t---->\t" + msg);
+        String eventStr = "nullEvent";
+        if(ev!=null){
+            eventStr = getTouchAction(ev.getAction());
+        }
+        Log.e("touch", cls.getSimpleName() + "\t----\t" + functionName + "\t---->\t" + eventStr + "\t---->\t" + msg);
     }
 
     private static String getTouchAction(int actionId) {

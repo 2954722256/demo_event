@@ -50,7 +50,4 @@ public class TouchEventFather extends LinearLayout {
 	}
 
 
-
-
-
 }
