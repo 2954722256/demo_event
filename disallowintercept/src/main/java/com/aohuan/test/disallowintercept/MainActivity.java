@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
         mWebView = (WebView) findViewById(R.id.webv);
 //        mWebView.loadUrl("http://baidu.com");
         mWebView.loadUrl("http://www.jianshu.com/");
+
         mWebView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-//                return super.shouldOverrideUrlLoading(view, url);
                 view.loadUrl(url);
                 return true;
             }

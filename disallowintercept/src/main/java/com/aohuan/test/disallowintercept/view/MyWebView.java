@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.webkit.WebView;
 
+import com.aohuan.test.tools.log.AhLog;
+import com.aohuan.test.tools.log.TouchEventUtil;
 
 /**
  * Created by Administrator on 2016/8/28.
@@ -62,6 +64,7 @@ public class MyWebView extends WebView{
 
         if(returnBean.getPositionY() - ev.getY() == 0){
             returnBean.setMoving(false);
+//            oldBean.setToUp(false);
         }else if(ev.getY() - returnBean.getPositionY() > 0){
             returnBean.setMoving(true);
             returnBean.setToUp(false);
@@ -103,16 +106,23 @@ public class MyWebView extends WebView{
 //            return;
 //        }
         if(!movingBean.isToUp()){
+            TouchEventUtil.logActionMsg(getClass(),"doSth31  !movingBean.toDown",ev);
             boolean isStart = (getScrollY() == 0);
             this.requestDisallowInterceptTouchEvent(!isStart);
         }else{
-            boolean isEnd = (getContentHeight()*getScale() - getHeight() - getScrollY() == 0);
+            boolean isEnd = isEndCalc();
             this.requestDisallowInterceptTouchEvent(!isEnd);
         }
 
     }
 
-
+    boolean isEndCalc(){
+        Float calcDis = getContentHeight()*getScale() - getHeight() - getScrollY();
+        if(Math.abs(Math.round(calcDis)) <= 10){
+            return true;
+        }
+        return false;
+    }
 
 
 
