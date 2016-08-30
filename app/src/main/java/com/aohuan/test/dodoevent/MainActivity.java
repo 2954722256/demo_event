@@ -1,10 +1,10 @@
 package com.aohuan.test.dodoevent;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.aohuan.test.dodoevent.tools.TouchEventUtil;
 
@@ -21,8 +21,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setGroupListenr() {
 //        setViewListener(findViewById(R.id.father), "father");
-//        setViewListener(findViewById(R.id.childs), "childs");
+        setViewListener(findViewById(R.id.childs), "childs");
+
+//        findViewById(R.id.childs2).setClickable(false);
 //        setViewListener(findViewById(R.id.childs2), "childs2");
+//        findViewById(R.id.childs2).setClickable(false);
     }
 
     private void setViewListener(final View view, final String viewName){
@@ -45,13 +48,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setButton() {
-        View view = findViewById(R.id.testBtn);
-        setViewListener(view, "btn");
-
-        View view2 = findViewById(R.id.testLl);
-        setViewListener(view2, "LL");
+//        View view = findViewById(R.id.testBtn);
+//        setViewListener(view, "btn");
+//
+//        View view2 = findViewById(R.id.testLl);
+//        setViewListener(view2, "LL");
 
 //        setViewListener(findViewById(R.id.allRl), "OutPlant");
+
     }
 
     @Override

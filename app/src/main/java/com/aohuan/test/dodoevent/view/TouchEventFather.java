@@ -39,8 +39,8 @@ public class TouchEventFather extends LinearLayout {
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		TouchEventUtil.logActionMsg(getClass(),"onInterceptTouchEvent",ev);
-		return super.onInterceptTouchEvent(ev);
-//		return true;
+//		return super.onInterceptTouchEvent(ev);
+		return true;
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class TouchEventUtil {
         Down, Up, Move, All
     }
 
-    static LogType mLogType = LogType.Down;
+    static LogType mLogType = LogType.All;
 
 
     public static void logActionMsg(Class cls, String functionName, MotionEvent ev, String msg) {

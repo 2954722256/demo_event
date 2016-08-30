@@ -1,1 +1,1 @@
-include ':app', ':disallowintercept'
+include ':app', ':disallowintercept', ':layout', ':tools'

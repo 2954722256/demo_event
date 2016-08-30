@@ -1,9 +1,12 @@
 package com.aohuan.test.dodoevent.view;
 
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.TouchDelegate;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 
 import com.aohuan.test.dodoevent.tools.TouchEventUtil;
@@ -25,7 +28,14 @@ public class TouchEventChilds extends LinearLayout {
 //		this.setOnClickListener(new OnClickListener() {
 //			@Override
 //			public void onClick(View v) {
-//				TouchEventUtil.doClick(TouchEventChilds.class);
+//				TouchEventUtil.logActionMsg(TouchEventChilds.class, "TouchEventChilds setOnClickListener  onClick", null);
+//			}
+//		});
+//		this.setOnTouchListener(new OnTouchListener() {
+//			@Override
+//			public boolean onTouch(View v, MotionEvent event) {
+//				TouchEventUtil.logActionMsg(TouchEventChilds.class, "TouchEventChilds setOnTouchListener  onTouch", event);
+//				return false;
 //			}
 //		});
 	}
@@ -33,6 +43,11 @@ public class TouchEventChilds extends LinearLayout {
 	@Override
 	public boolean onInterceptTouchEvent(MotionEvent ev) {
 		TouchEventUtil.logActionMsg(getClass(),"onInterceptTouchEvent",ev);
+		this.requestDisallowInterceptTouchEvent(true);
+//		if(getParent()!=null){
+//			getParent().requestDisallowInterceptTouchEvent(true);
+//			TouchEventUtil.logActionMsg(getClass(),"onInterceptTouchEvent  requestDisallowInterceptTouchEvent  true",ev);
+//		}
 		return super.onInterceptTouchEvent(ev);
 //		return true;
 	}
@@ -40,15 +55,64 @@ public class TouchEventChilds extends LinearLayout {
 	@Override
 	public boolean dispatchTouchEvent(MotionEvent ev) {
 		TouchEventUtil.logActionMsg(getClass(),"dispatchTouchEvent",ev);
+		this.requestDisallowInterceptTouchEvent(true);
+//		if(getParent()!=null){
+//			getParent().requestDisallowInterceptTouchEvent(true);
+//			TouchEventUtil.logActionMsg(getClass(),"onInterceptTouchEvent  requestDisallowInterceptTouchEvent  true",ev);
+//		}
 		return super.dispatchTouchEvent(ev);
+//		return false;
 //		return true;
 	}
 
 	@Override
 	public boolean onTouchEvent(MotionEvent ev) {
 		TouchEventUtil.logActionMsg(getClass(),"onTouchEvent",ev);
-//		return super.onTouchEvent(ev);
-		return true;
+		this.requestDisallowInterceptTouchEvent(true);
+//		if(getParent()!=null){
+//			getParent().requestDisallowInterceptTouchEvent(true);
+//			TouchEventUtil.logActionMsg(getClass(),"onInterceptTouchEvent  requestDisallowInterceptTouchEvent  true",ev);
+//		}
+		return super.onTouchEvent(ev);
+//		return true;
 	}
+
+
+
+
+
+	Button isNullButtonView;
+
+	@Override
+	protected void onFinishInflate() {
+		super.onFinishInflate();
+		if(getChildAt(0) != null && getChildAt(0) instanceof Button){
+			isNullButtonView = (Button) getChildAt(0);
+		}
+	}
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+		//Apply the whole area of this view as the delegate area
+		if(isNullButtonView != null){
+			Rect bounds = new Rect(0, 0, getMeasuredWidth(), getMeasuredHeight());
+			TouchDelegate delegate = new TouchDelegate(bounds, isNullButtonView);
+			setTouchDelegate(delegate);
+		}
+	}
+
+
+	@Override
+	public void setPadding(int left, int top, int right, int bottom) {
+		super.setPadding(left, top, right, bottom);
+	}
+
+	@Override
+	public void setPaddingRelative(int start, int top, int end, int bottom) {
+		super.setPaddingRelative(start, top, end, bottom);
+	}
+
+
 
 }

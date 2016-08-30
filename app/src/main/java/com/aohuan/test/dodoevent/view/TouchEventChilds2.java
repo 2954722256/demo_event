@@ -33,12 +33,20 @@ public class TouchEventChilds2 extends Button {
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
         TouchEventUtil.logActionMsg(getClass(),"dispatchTouchEvent",ev);
+//        if(getParent()!=null){
+//            getParent().requestDisallowInterceptTouchEvent(true);
+//            TouchEventUtil.logActionMsg(getClass(),"dispatchTouchEvent requestDisallowInterceptTouchEvent true ",ev);
+//        }
         return super.dispatchTouchEvent(ev);
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         TouchEventUtil.logActionMsg(getClass(),"onTouchEvent",ev);
+//        if(getParent()!=null){
+//            getParent().requestDisallowInterceptTouchEvent(true);
+//            TouchEventUtil.logActionMsg(getClass(),"onInterceptTouchEvent  requestDisallowInterceptTouchEvent  true",ev);
+//        }
         return super.onTouchEvent(ev);
     }
 
