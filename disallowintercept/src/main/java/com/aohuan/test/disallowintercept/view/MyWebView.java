@@ -26,17 +26,40 @@ public class MyWebView extends WebView{
         super(context, attrs, defStyleAttr);
     }
 
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        doSth3(ev);
-//        return super.onInterceptTouchEvent(ev);
-//    }
+    enum DoType{
+        noting0, Disallow1, DisallowEnd2, DisallowEndTop3
+    }
+
 
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        doSth3(ev);
-        return super.onTouchEvent(ev);
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        doSth(DoType.DisallowEndTop3, ev);
+        return super.onInterceptTouchEvent(ev);
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent ev) {
+//        doSth3(ev);
+//        return super.onTouchEvent(ev);
+//    }
+
+    void doSth(DoType dt, MotionEvent ev){
+        switch (dt){
+            case noting0:
+                doSth0(ev);
+                break;
+            case Disallow1:
+                doSth1(ev);
+                break;
+            case DisallowEnd2:
+                doSth2(ev);
+                break;
+            case DisallowEndTop3:
+                doSth3(ev);
+                break;
+        }
+    }
+
 
     void doSth0(MotionEvent ev){}
 
@@ -45,7 +68,7 @@ public class MyWebView extends WebView{
     }
 
     void doSth2(MotionEvent ev){
-        boolean isEnd = (getContentHeight()*getScale() - getHeight()-getScrollY() == 0);
+        boolean isEnd = (getContentHeight()*getScale() - getHeight()-getScrollY() < 10);
         this.requestDisallowInterceptTouchEvent(!isEnd);
     }
 
